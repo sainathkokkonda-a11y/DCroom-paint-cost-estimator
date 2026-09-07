@@ -1,0 +1,108 @@
+<div style="background: rgb(255, 255, 255); border-radius: 12px; border: 2px solid rgb(0, 86, 179); box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 15px; font-family: Arial, sans-serif; margin: 20px auto; max-width: 650px; overflow: hidden;">
+    
+    <!--Top Blue Header Section-->
+    <div style="background-color: #0056b3; color: white; padding: 20px; text-align: center;">
+        <br /><h2 style="font-size: 22px; margin: 0px 0px 8px;"><br />&nbsp;Room Paint Cost Estimator</h2>
+        <p style="font-size: 14px; margin: 0px; opacity: 0.9;">Calculate paint requirements with custom currency and manual cost rates!</p>
+    </div>
+
+    <!--Body Content Section-->
+    <div style="padding: 20px;">
+        
+        <!--Input Form Fields-->
+        <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
+            <div>
+                <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Room Length (Feet):</label>
+                <input id="roomLength" style="border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;" type="number" />
+            </div>
+            
+            <div>
+                <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Room Width (Feet):</label>
+                <input id="roomWidth" style="border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;" type="number" />
+            </div>
+
+            <div>
+                <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Room Height (Feet):</label>
+                <input id="roomHeight" style="border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;" type="number" />
+            </div>
+
+            <div>
+                <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Deductions (Doors &amp; Windows Area in Sq. Ft.):</label>
+                <input id="deductions" placeholder="e.g., 40 (or 0 if none)" style="border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;" type="number" />
+            </div>
+            
+            <div>
+                <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Number of Coats:</label>
+                <select id="numCoats" style="background: white; border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;">
+                    <option value="1">1 Coat</option>
+                    <option selected="" value="2">2 Coats (Recommended)</option>
+                    <option value="3">3 Coats</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 1 1 0%;">
+                    <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Select Currency:</label>
+                    <select id="currencySelect" style="background: white; border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;">
+                        <option selected="" value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="₹">INR (₹)</option>
+                        <option value="A$">AUD (A$)</option>
+                        <option value="C$">CAD (C$)</option>
+                    </select>
+                </div>
+                <div style="flex: 1 1 0%;">
+                    <label style="color: #0056b3; display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px;">Cost per Litre (Manual):</label>
+                    <input id="unitCost" style="border-radius: 6px; border: 1px solid rgb(204, 204, 204); box-sizing: border-box; font-size: 14px; padding: 10px; width: 100%;" type="number" value="15" />
+                </div>
+            </div>
+        </div>
+
+        <!--Calculate Button-->
+        <button onclick="calculatePaintCost()" style="background-color: #0056b3; border-color: currentcolor; border-image: none; border-radius: 6px; border-style: none; border-width: medium; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: bold; margin-bottom: 20px; padding: 12px; width: 100%;">Calculate Estimate</button>
+
+        <!--Results Display Box-->
+        <div id="resultBox" style="background: rgb(248, 249, 250); border-radius: 6px; border: 1px solid rgb(0, 86, 179); display: none; padding: 15px;">
+            <h3 style="color: #0056b3; font-size: 18px; margin: 0px 0px 10px; text-align: center;">Estimation Results</h3>
+            <p style="color: #333333; font-size: 14px; margin: 8px 0px;"><strong>Total Paint Area:</strong> <span id="totalArea">0</span> sq. ft.</p>
+            <p style="color: #333333; font-size: 14px; margin: 8px 0px;"><strong>Paint Required:</strong> <span id="paintLitres">0</span> Litres</p>
+            <p style="color: #333333; font-size: 14px; margin: 8px 0px;"><strong>Estimated Cost:</strong> <span id="currencySymbol">$</span><span id="totalCost">0</span></p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function calculatePaintCost() {
+        const length = parseFloat(document.getElementById('roomLength').value) || 0;
+        const width = parseFloat(document.getElementById('roomWidth').value) || 0;
+        const height = parseFloat(document.getElementById('roomHeight').value) || 0;
+        const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+        const coats = parseInt(document.getElementById('numCoats').value) || 2;
+        const currencySymbol = document.getElementById('currencySelect').value;
+        const costPerLitre = parseFloat(document.getElementById('unitCost').value) || 15;
+
+        if (length <= 0 || width <= 0 || height <= 0) {
+            alert('Please enter valid room dimensions!');
+            return;
+        }
+
+        const perimeter = 2 * (length + width);
+        const grossWallArea = perimeter * height;
+        
+        let netArea = grossWallArea - deductions;
+        if (netArea < 0) netArea = 0;
+
+        const totalPaintedArea = netArea * coats;
+        const litresNeeded = totalPaintedArea / 100;
+        const estimatedCost = litresNeeded * costPerLitre;
+
+        document.getElementById('totalArea').textContent = netArea.toFixed(2);
+        document.getElementById('paintLitres').textContent = litresNeeded.toFixed(1);
+        document.getElementById('currencySymbol').textContent = currencySymbol;
+        document.getElementById('totalCost').textContent = estimatedCost.toFixed(2);
+        
+        document.getElementById('resultBox').style.display = 'block';
+    }
+</script>
