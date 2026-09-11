@@ -1,0 +1,71 @@
+<div class="paint-estimator-container">
+    <!-- Top Blue Header Section -->
+    <div class="estimator-header">
+        <h2>Room Paint Cost Estimator</h2>
+        <p>Calculate paint requirements with custom currency and manual cost rates!</p>
+    </div>
+
+    <!-- Body Content Section -->
+    <div class="estimator-body">
+        <!-- Input Form Fields -->
+        <div class="form-group">
+            <div class="form-field">
+                <label for="roomLength">Room Length (Feet):</label>
+                <input id="roomLength" type="number" />
+            </div>
+            
+            <div class="form-field">
+                <label for="roomWidth">Room Width (Feet):</label>
+                <input id="roomWidth" type="number" />
+            </div>
+
+            <div class="form-field">
+                <label for="roomHeight">Room Height (Feet):</label>
+                <input id="roomHeight" type="number" />
+            </div>
+
+            <div class="form-field">
+                <label for="deductions">Deductions (Doors &amp; Windows Area in Sq. Ft.):</label>
+                <input id="deductions" placeholder="e.g., 40 (or 0 if none)" type="number" />
+            </div>
+            
+            <div class="form-field">
+                <label for="numCoats">Number of Coats:</label>
+                <select id="numCoats">
+                    <option value="1">1 Coat</option>
+                    <option value="2" selected>2 Coats (Recommended)</option>
+                    <option value="3">3 Coats</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="currencySelect">Select Currency:</label>
+                    <select id="currencySelect">
+                        <option value="$" selected>USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="₹">INR (₹)</option>
+                        <option value="A$">AUD (A$)</option>
+                        <option value="C$">CAD (C$)</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="unitCost">Cost per Litre (Manual):</label>
+                    <input id="unitCost" type="number" value="15" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button class="calculate-btn" onclick="calculatePaintCost()">Calculate Estimate</button>
+
+        <!-- Results Display Box -->
+        <div id="resultBox" class="result-box">
+            <h3>Estimation Results</h3>
+            <p><strong>Total Paint Area:</strong> <span id="totalArea">0</span> sq. ft.</p>
+            <p><strong>Paint Required:</strong> <span id="paintLitres">0</span> Litres</p>
+            <p><strong>Estimated Cost:</strong> <span id="currencySymbol">$</span><span id="totalCost">0</span></p>
+        </div>
+    </div>
+</div>
