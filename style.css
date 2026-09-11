@@ -1,0 +1,107 @@
+.paint-estimator-container {
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    border: 2px solid rgb(0, 86, 179);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 15px;
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 650px;
+    overflow: hidden;
+}
+
+.estimator-header {
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.estimator-header h2 {
+    font-size: 22px;
+    margin: 0px 0px 8px;
+}
+
+.estimator-header p {
+    font-size: 14px;
+    margin: 0px;
+    opacity: 0.9;
+}
+
+.estimator-body {
+    padding: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    color: #0056b3;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-field input, 
+.form-field select, 
+.form-col input, 
+.form-col select {
+    border-radius: 6px;
+    border: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    background: white;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-col {
+    flex: 1 1 0%;
+}
+
+.calculate-btn {
+    background-color: #0056b3;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 12px;
+    width: 100%;
+}
+
+.calculate-btn:hover {
+    background-color: #004090;
+}
+
+.result-box {
+    background: rgb(248, 249, 250);
+    border-radius: 6px;
+    border: 1px solid rgb(0, 86, 179);
+    display: none;
+    padding: 15px;
+}
+
+.result-box h3 {
+    color: #0056b3;
+    font-size: 18px;
+    margin: 0px 0px 10px;
+    text-align: center;
+}
+
+.result-box p {
+    color: #333333;
+    font-size: 14px;
+    margin: 8px 0px;
+}
